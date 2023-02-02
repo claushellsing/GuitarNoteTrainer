@@ -37,7 +37,7 @@ const chooseNote = (note) => {
 <template>
   <div>
     <table>
-      <tr :key="index" v-for="(note, index) in shuffledNotes">
+      <tr v-for="(note, index) in shuffledNotes">
         <td>
           <v-btn
             :color="color[note]"
