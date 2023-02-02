@@ -23,6 +23,12 @@ const color = computed(() => {
   return '';
 });
 
+const shuffledNotes = computed(() => {
+  return [...notes].sort(function () {
+    return Math.random() - 0.5;
+  });
+});
+
 const chooseNote = (note) => {
   isRevealed.value = true;
 };
@@ -31,73 +37,13 @@ const chooseNote = (note) => {
 <template>
   <div>
     <table>
-      <tr>
+      <tr :key="index" v-for="(note, index) in shuffledNotes">
         <td>
           <v-btn
-            :color="color.do"
+            :color="color[note]"
             :disabled="isRevealed"
-            @click="chooseNote('do')"
-            >DO</v-btn
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <v-btn
-            :color="color.re"
-            :disabled="isRevealed"
-            @click="chooseNote('re')"
-            >RE</v-btn
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <v-btn
-            :color="color.mi"
-            :disabled="isRevealed"
-            @click="chooseNote('mi')"
-            >MI</v-btn
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <v-btn
-            :color="color.fa"
-            :disabled="isRevealed"
-            @click="chooseNote('fa')"
-            >FA</v-btn
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <v-btn
-            :color="color.sol"
-            :disabled="isRevealed"
-            @click="chooseNote('sol')"
-            >SOL</v-btn
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <v-btn
-            :color="color.la"
-            :disabled="isRevealed"
-            @click="chooseNote('la')"
-            >LA</v-btn
-          >
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <v-btn
-            :color="color.si"
-            :disabled="isRevealed"
-            @click="chooseNote('si')"
-            >SI</v-btn
+            @click="chooseNote(note)"
+            >{{ note.toUpperCase() }}</v-btn
           >
         </td>
       </tr>
